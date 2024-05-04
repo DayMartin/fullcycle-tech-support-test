@@ -1,0 +1,19 @@
+Olá, dev! Como vai? Aqui é a Dinah.
+
+Após análise do seu projeto identifiquei alguns problemas que estão impedindo da execução de seu código:
+
+1. Não foi criado um entrypoint para instalar as dependencias e o node_modules e iniciar o projeto em modo dev. 
+    - Incluido no docker-compose.yaml 'entrypoint: sh -c "npm install && npm run dev"'
+2. Adicionado no volume do Banco de dados para que seja iniciado o arquivo init.sql para criar a tabela juntamente com o container
+    - ./database:/docker-entrypoint-initdb.d
+3. Este não impede de subir o container, porém classifica para que o container API só inicie se der tudo certo com o container do banco de dados
+    - No container da API no docker-compose, adicionado = database: condition: "service_healthy"
+    - No container do Banco de dados no docker-compose adicionado: 
+        healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p$$MYSQL_ROOT_PASSWORD"]
+      interval: 10s
+      timeout: 30s
+      retries: 5
+
+4. adicionei um .gitignore para não subir para o github o node_modules
+
