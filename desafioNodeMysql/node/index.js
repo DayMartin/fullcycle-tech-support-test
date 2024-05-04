@@ -7,7 +7,7 @@ const config = {
   host: 'database',
   user: 'root',
   password: 'root',
-  database: 'database'
+  database: 'dbpeople'
 }
 
 
