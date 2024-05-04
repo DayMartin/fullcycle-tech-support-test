@@ -25,7 +25,7 @@ services:
       - app
 
   database:
-    image: mysql:8.0
+    image: mysql:5.7
     command: --innodb-use-native-aio=0
     container_name: database
     restart: always
