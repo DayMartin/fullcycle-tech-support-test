@@ -1,0 +1,27 @@
+Olá, dev! Como vai? Aqui é a Dinah.
+
+Após análise do seu projeto identifiquei 2 problemas que estão impedindo da execução de seu container:
+
+1. "lient does not support authentication protocol requested by server; consider upgrading MySQL client" 
+isso acontece porque as versões mais recentes da image do MySQL para o Docker não tem suporte a forma de criptografia para as senhas do banco. 
+Até que isso seja resolvido pela comunidade de dev's do MySQL aqui está algumas sugestões para solucionar este problema: 
+
+    1. Você pode atualizar a versão do seu MySQL no docker-compose.yaml para a versão 5.7 ( resolução utilizada )
+    2. Você pode utilizar a lib mysql2 que tem suporte nativo para esse tipo de criptografia. 
+
+2. "Error: ER_NO_SUCH_TABLE: Table 'database.people' doesn't exist". 
+Este erro acontece porque a tabela "people" não existe no banco de dados ao rodar o código pela primeira vez, 
+então o que devemos fazer é criar uma consulta SQL na montagem do container para verificar se existe a tabela "people", se não existir, 
+deve criar essa tabela no banco de dados. Dessa forma, qualquer dev que iniciar seu projeto com uma configuração nova do banco, 
+irá criar automaticamente a tabela "people" através da consulta. 
+Não esqueça de fazer isso para todas as tabelas que você contiver em seu banco de dados. 
+Os passos a serem seguidos: 
+
+    1. Eu inclui um folder chamado "mysql" e dentro dele um file chamado "init.sql"
+    2. Dentro do file inclui uma consulta SQL para criar a tabela se não existir
+    3. No docker-compose.yaml inclui um volume para ser montado no container que chama o file criado com a consulta sql
+    4. Eu alterei o nome do banco de dados de "dabase" para "dbpeople" para que a consulta no sql buscasse corretamente o database. 
+
+OBS: Ao realizar as modificações não esqueça de excluir os "Volumes"
+
+Dev, espero ter ajudado. Estou à disposição para qualquer dúvida. Até breve!
