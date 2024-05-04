@@ -6,6 +6,7 @@ services:
     build:
       context: app
     container_name: app
+    entrypoint: sh -c "npm install && npm run dev"
     tty: true
     volumes:
       - ./app:/usr/src/app
