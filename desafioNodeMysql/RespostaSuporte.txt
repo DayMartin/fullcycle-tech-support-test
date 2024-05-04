@@ -21,6 +21,8 @@ Os passos a serem seguidos:
     2. Dentro do file inclui uma consulta SQL para criar a tabela se não existir
     3. No docker-compose.yaml inclui um volume para ser montado no container que chama o file criado com a consulta sql
     4. Eu alterei o nome do banco de dados de "dabase" para "dbpeople" para que a consulta no sql buscasse corretamente o database. 
+    5. Defini no packege.json o 'tsc' e 'dev' script para iniciar o projeto já com o node_modules
+    6. Inclui no dockerFile o CMD para iniciar os comandos definidos no packege.json
 
 OBS: Ao realizar as modificações não esqueça de excluir os "Volumes"
 
